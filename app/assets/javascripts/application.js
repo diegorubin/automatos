@@ -10,14 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require activestorage
-//= require turbolinks
 //= require libs/codemirror
 //= require libs/javascript
 //= require_tree .
 
-var myCodeMirror = CodeMirror(document.getElementById('editor', {
+var editor = CodeMirror(document.getElementById('editor', {
   mode: 'javascript',
   lineNumbers: true,
 }));
