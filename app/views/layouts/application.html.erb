@@ -24,11 +24,15 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
+                <a class="nav-link" href="/">
+                  Início
                 </a>
               </li>
+              <% @exercises.each do |exercise| %>
+                <li class="nav-item">
+                  <%= link_to exercise.title, exercise, class: 'nav-link' %>
+                </li>
+              <% end %>
             </ul>
           </div>
         </nav>
@@ -37,8 +41,7 @@
 		    </main>
 		  </div>
 		</div>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script> 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/graphdracula/1.0.3/dracula.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :javascript %>
   </body>
 </html>

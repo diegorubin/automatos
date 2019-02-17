@@ -14,3 +14,9 @@
 
  @import 'bootstrap';
  @import './codemirror';
+
+ #editor {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+ }

@@ -1,7 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Exercise.destroy_all
+[
+  {title: 'Match Simples', sentences: ['casa']},
+  {title: 'Plural', sentences: ['casa', 'casas']},
+  {title: 'Números Inteiros', sentences: [
+    '1234567890',
+    '0b11011',
+    '0112345670',
+    '0x1234567890abcdef',
+  ]},
+].each_with_index do |attributes, index|
+  attributes[:position] = index
+  attributes[:title] = "#{index + 1}. #{attributes[:title]}"
+  Exercise.create(attributes)
+end

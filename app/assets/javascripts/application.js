@@ -12,6 +12,9 @@
 //
 //= require libs/codemirror
 //= require libs/javascript
+//= require libs/raphael-min
+//= require libs/graffle
+//= require libs/graph
 //= require_tree .
 
 var editor = CodeMirror(document.getElementById('editor', {

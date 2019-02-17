@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">Descrição</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <% @exercise.sentences.each do |sentence| %>
+      <p class="sentence">
+        <%= sentence %>
+      </p>
+      <p class="result">
+      </p>
+    <% end %>
+    <input type="text" class="sentence" />
+    <p class="result">
+    </p>
+  </div>
+  <div class="col-md-6">
+    <div id="helper">
+      <p>
+        <strong>consumir caracter</strong>: 
+        this.match(expected)
+      </p>
+      <p>
+        <strong>consultar próximo caracter</strong>: 
+        this.lookahead()
+      </p>
+    </div>
+    <p>
+      <a href="#" id="evaluate">Avaliar</a>
+    </p>
+    <div id="editor"></div>
+  </div>
+</div>

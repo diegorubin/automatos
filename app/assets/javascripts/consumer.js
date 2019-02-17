@@ -1,17 +1,20 @@
 class Consumer {
 	constructor(sentence) {
   	this.element = sentence;
-    this.sentence = sentence.innerText;
-    this.matchers = [];
+    this.sentence = sentence.innerText || sentence.value;
     this.position = 0;
+    this.matchers = [];
   }
   
-  match(expected, found) {
-  	if (expected === found) {
-    	this.matchers.push(found);
+  match(expected) {
+    if (typeof(expected) == "object" && expected.indexOf(this.lookahead()) > -1) {
+    	this.matchers.push(this.lookahead());
+      this.position++;
+    } else if (expected === this.lookahead()) {
+    	this.matchers.push(expected);
       this.position++;
     } else {
-    	new Error("expected " + expected + " but found " + found);
+    	throw new Error("expected " + expected + " but found " + this.lookahead());
     }
   }
   
@@ -20,18 +23,11 @@ class Consumer {
   }
   
   evaluate() {
-  	eval(`
-    	this.match('a', this.lookahead());
-      this.match('b', this.lookahead());
-      this.match('a', this.lookahead());
-      this.match('c', this.lookahead());
-      this.match('a', this.lookahead());
-      
-      if (this.lookahead() == 'x' || this.lookahead() == 't') {
-        this.match(this.lookahead(), this.lookahead());
-      }
+    if (!this.sentence) {
+      return;
+    }
 
-    `);
+  	eval(editor.getValue());
   	this.render();
   }
   
@@ -52,10 +48,26 @@ class Consumer {
   }
 }
 
-function evaluateSentences() {
+function evaluateSentences(event) {
+  event.preventDefault();
+
 	var sentences = document.querySelectorAll('.sentence');
+	var results = document.querySelectorAll('.result');
+  var index = 0;
   sentences.forEach(function(sentence) {
   	var consumer = new Consumer(sentence);
-    consumer.evaluate();
+    try {
+      results[index].innerHTML = '';
+      consumer.evaluate();
+    } catch(e) {
+      results[index].innerHTML = (sentence.innerText || sentence.value) + ' - ' + e;
+    }
+    index++;
   });
 }
+
+var evaluateButton = document.getElementById('evaluate');
+if (evaluateButton) {
+  evaluateButton.onclick = evaluateSentences;
+}
+
